@@ -1,0 +1,47 @@
+:root {
+    --basic-color1: #348345;
+    --basic-color2: #FF9900;
+    --basic-color3: #ffffff;
+}
+.ml {
+    margin-left: 5rem;
+    width: 85%;
+    height: 60vh;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+}
+.mlh3 {
+    font-size: 3.5rem;
+    font-weight: 900;
+}
+.ContainerStyles {
+    width: 80%;
+    margin-bottom: 20px;
+    height: 50px;
+}
+
+.IconStyle,
+.AfterIcon {
+    font-size: 1.2rem;
+    color: var(--basic-color1);
+}
+
+.ButtonContainer {
+    width: 80%;
+    background-color: var(--basic-color2);
+    color: var(--basic-color3);
+    font-size: 1rem;
+    font-weight: 600;
+}
+.ProfileContainer {
+    border: 1px solid var(--basic-color1);
+    background-color: transparent;
+    width: 80%;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.IconBefore {
+    font-size: 1.5rem;
+}

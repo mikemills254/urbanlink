@@ -1,0 +1,15 @@
+.ContainerStyles {
+    width: 80%;
+    height: 50px;
+}
+.IconStyle {
+    color: var(--basic-color1);
+    font-size: 1.3rem;
+}
+.ButtonStyles {
+    width: 80%;
+    margin-top: 1rem;
+    background-color: var(--basic-color2);
+    color: var(--basic-color3);
+    font-weight: 600;
+}
