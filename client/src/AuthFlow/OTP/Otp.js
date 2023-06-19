@@ -26,7 +26,7 @@ const RightDiv = () => {
                         maxLength={6}
                     />
                     <CustomBtn
-                        text='LOGIN'
+                        text='Verify OTP'
                         ContainerStyle={styles.ButtonStyles}
                     />
                 </div>

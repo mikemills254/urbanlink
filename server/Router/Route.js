@@ -1,6 +1,7 @@
 import { Router } from "express";
 const router = Router()
 import * as Controller from '../Controller/Controller.js'
+import { localVariables } from '../Middleware/auth.js'
 
 // POST methods
 router.route('/register').post(Controller.register)
@@ -10,7 +11,7 @@ router.route('/login').post(Controller.verifyUser, Controller.login);
 
 // GET methods
 router.route('/user/:username').get(Controller.getUser) 
-router.route('/generateOTP').get(Controller.generateOTP) 
+router.route('/generateOTP').get( Controller.verifyUser, localVariables, Controller.generateOTP) 
 router.route('/verifyOTP').get(Controller.VerifyOtp) 
 router.route('/createResetSession').get(Controller.createResetSession) 
 

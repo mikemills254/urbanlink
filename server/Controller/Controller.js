@@ -2,6 +2,7 @@ import UserModel from "../Models/User.model.js"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import ENV from '../config.js'
+import Otp from 'otp-generator'
 
 /** middleware to authenticate user*/
 export async function verifyUser(req, res, next){
@@ -79,44 +80,76 @@ export async function login(req, res) {
     }
 }
 
-export async function getUser(req,res){
-    
-    const { email } = req.params;
+export async function getUser(req, res) {
+    const { username } = req.params; // Extract username from URL parameters
 
     try {
-        
-        if(!email) return res.status(501).send({ error: "Invalid email address"});
 
-        UserModel.findOne({ email }, function(err, user){
-            if(err) return res.status(500).send({ err });
-            if(!user) return res.status(501).send({ error : "Couldn't Find the User"});
+        if (!username) return res.status(500).send({ error: 'The username is incorrect' });
 
-            return res.status(201).send(user);
-        })
+        let user = await UserModel.findOne({ username });
+        if (!user) return res.status(404).send({ error: 'User has not been found' });
 
+        const { password, ...rest} = Object.assign({}, user.toJSON())
+
+        return res.status(200).send(rest);
     } catch (error) {
-        return res.status(404).send({ error : "Cannot Find User Data"});
+        return res.status(500).send({ error: 'An error occurred while fetching the user' });
     }
-
 }
+
 
 export async function updateUser(req, res) {
     res.json('Update User')
 }
 
 export async function generateOTP(req, res) {
-    res.json('generateOtp Model')
+    req.app.locals.OTP = await Otp.generate(6, {upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false})
+    res.status(201).send({code: req.app.locals.OTP})
 }
 
 export async function VerifyOtp(req, res) {
-    res.json('VerifyOtp Model')
+    const { code } = req.query;
+    if (parseInt(req.app.locals.OTP) === parseInt(code)) {
+        req.app.locals.OTP = null,
+        req.app.locals.resetSession = true
+        
+        return res.status(201).send({ msg: 'OTP has been verified' });
+    }
+    
+    return res.status(401).send({ error: "Invalid OTP" });
 }
 
 export async function createResetSession(req, res) {
-    res.json('Reset Session model')
+    if(req.locals.resetSession){
+        req.locals.resetSession = false
+
+        return res.status(201).send({ msg: "Access Granted "})
+    }
+    return res.status(401).send({msg: 'Session Expired'})
 }
 
 export async function resetPassword(req, res) {
-    res.json('Reset Password Model')
+    try {
+        if (!req.app.locals.resetSession) return res.status(401).send({ msg: 'Session Expired' });
+        const { email, password } = req.body;
+        
+        try {
+            const user = await UserModel.findOne({ email });
+            if (!user) {
+                return res.status(404).send({ error: 'User not found' });
+            }
+            
+            const hashedPassword = await bcrypt.hash(password, 10);
+            await UserModel.updateOne({ email: user.email }, { password: hashedPassword });
+            
+            return res.status(201).send({ msg: 'User has been updated' });
+        } catch (error) {
+            return res.status(500).send({ error: 'Internal server error' });
+        }
+    } catch (error) {
+        return res.status(500).send({ error: 'Internal server error' });
+    }
 }
+
 
