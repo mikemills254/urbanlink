@@ -39,7 +39,7 @@ const RightDiv = () => {
 const Otp = () => {
     return (
         <div className='flex align-middle justify-center'>
-            <LeftDiv/>
+            {/* <LeftDiv/> */}
             <RightDiv/>
         </div>
     )

@@ -34,7 +34,7 @@ const RightDiv = () => {
         navigate('/ForgotPassword')
     }
     return(
-        <div className='flex w-[60%] h-full justify-center p-10'>
+        <div className='flex w-[50%] h-full justify-center p-10'>
             <div className='w-[90%] flex flex-col items-center justify-center'>
                 <div className='mx-auto flex-col flex items-center'>
                     <h3 className='text-4xl font-semibold'>Welcome Back!</h3>
@@ -108,8 +108,8 @@ const RightDiv = () => {
 
 const LoginIn = () => {
     return (
-        <div className='flex align-middle'>
-            <LeftDiv/>
+        <div className='flex item-center justify-center'>
+            {/* <LeftDiv/> */}
             <RightDiv/>
         </div>
     )

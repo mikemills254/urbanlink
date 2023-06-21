@@ -7,16 +7,21 @@ import CustomBtn from '../../Components/CustomeBtn/CustomBtn';
 
 const RightDiv = () => {
     const [Email, setEmail] = useState('')
+    const [ emtptyEmailError, setEmptyEmailError] = useState(false)
+
+    const OnsubmitClicked = (Email) => {
+        console.log(Email)
+    }
 
     return(
-        <div className='flex w-[60%] h-full justify-center p-10'>
+        <div className='flex w-[50%] h-full justify-center p-10'>
             <div className='w-[90%] flex flex-col items-center justify-center'>
                 <div className='mx-auto w-full flex flex-col items-center justify-start'>
                     <h3 className='text-4xl font-semibold '>Forgot Password!</h3>
                     <p className='w-[80%] text-sm leading-2'>Enter a valied Email Address and check your email for more assistance</p>
                 </div>
                 <div className='flex justify-center items-center w-[100%] mt-10'>
-                    <form className='flex flex-col items-center justify-center w-[100%]'>
+                    <form onSubmit={OnsubmitClicked} className='flex flex-col items-center justify-center w-[100%]'>
                         <CustomInput 
                             ContainerStyles={styles.ContainerStyles}
                             placeholder='Email Address'
@@ -30,9 +35,11 @@ const RightDiv = () => {
                                 setEmail()
                             }}
                         />
+                        {emtptyEmailError && <small className='text-[red] mb-2 '>please enter a valied email address</small>}
                         <CustomBtn
                             text='Reset'
                             ContainerStyle={styles.ButtonStyles}
+                            onClick={OnsubmitClicked}
                         />
                     </form>
                 </div>
@@ -43,8 +50,8 @@ const RightDiv = () => {
 
 const ForgotPassword = () => {
     return (
-        <div className='flex align-middle'>
-            <LeftDiv/>
+        <div className='flex items-center flex-col justify-center p-10'>
+            {/* <LeftDiv/> */}
             <RightDiv/>
         </div>
     )

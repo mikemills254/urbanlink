@@ -6,7 +6,7 @@ import { localVariables } from '../Middleware/auth.js'
 // POST methods
 router.route('/register').post(Controller.register)
 // router.route('/registerMail').post(); //send the email
-router.route('/authenticate').post((req, res) => res.end()); 
+router.route('/authenticate').post(Controller.verifyUser, (req, res) => res.end()); 
 router.route('/login').post(Controller.verifyUser, Controller.login); 
 
 // GET methods

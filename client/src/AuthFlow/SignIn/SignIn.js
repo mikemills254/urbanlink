@@ -65,7 +65,7 @@ const RightDiv = () => {
     
 
     return(
-        <div className='h-screen w-[60%] flex justify-center p-10'>
+        <div className='h-screen w-[50%] flex justify-center p-10'>
             <div className='w-[90%] flex flex-col items-center'>
                 <div className='mx-auto flex-col flex items-center'>
                     <h3 className='text-4xl font-semibold'>Welcome To Urbanlink</h3>
@@ -154,8 +154,8 @@ const RightDiv = () => {
 
 const SignIn = () => {
     return (
-        <div className='flex align-middle'>
-            <LeftDiv/>
+        <div className='flex item-center justify-center'>
+            {/* <LeftDiv/> */}
             <RightDiv/>
         </div>
     )
