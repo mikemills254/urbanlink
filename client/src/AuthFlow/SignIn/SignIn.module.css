@@ -22,6 +22,9 @@
     margin-bottom: 20px;
     height: 50px;
 }
+.InputStyles{
+    background-color: #dcdcdc;
+}
 
 .IconStyle,
 .AfterIcon {

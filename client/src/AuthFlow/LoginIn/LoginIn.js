@@ -6,7 +6,7 @@ import { SlEnvolope, SlUser, SlEye} from "react-icons/sl";
 import CustomBtn from '../../Components/CustomeBtn/CustomBtn';
 import { FcGoogle } from 'react-icons/fc'
 import { useNavigate } from 'react-router-dom';
-
+import useAuthStore from '../../Store/Store'
 
 const RightDiv = () => {
     const [Email, setEmail] = useState('')
@@ -18,6 +18,7 @@ const RightDiv = () => {
     const togglePasswordVisible = () => {
         setPasswordVisible(!passwordVisible);
     };
+    useAuthStore(state => console.log(state))
 
     const OnLoginClicked = () => {
         if(Email.length === 0 || Password.length === 0) {
@@ -34,7 +35,7 @@ const RightDiv = () => {
         navigate('/ForgotPassword')
     }
     return(
-        <div className='flex w-[50%] h-full justify-center p-10'>
+        <div className='h-[60%] w-[40%] flex justify-center p-10 bg-[#dcdcdc] rounded-2xl'>
             <div className='w-[90%] flex flex-col items-center justify-center'>
                 <div className='mx-auto flex-col flex items-center'>
                     <h3 className='text-4xl font-semibold'>Welcome Back!</h3>
@@ -108,7 +109,7 @@ const RightDiv = () => {
 
 const LoginIn = () => {
     return (
-        <div className='flex item-center justify-center'>
+        <div className='flex item-center justify-center p-4'>
             {/* <LeftDiv/> */}
             <RightDiv/>
         </div>

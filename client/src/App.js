@@ -28,7 +28,7 @@ const AppStack = () => {
 };
 
 export default function App() {
-    const IsAuthenticated = false;
+    const IsAuthenticated = true;
 
     return (
         <Router>
